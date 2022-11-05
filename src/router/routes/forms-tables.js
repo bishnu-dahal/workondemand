@@ -238,5 +238,20 @@ export default [
       ],
     },
   },
-
+  {
+    path: '/service_providers',
+    name: 'service_providers',
+    component: () => import('@/views/table/bs-table/serviceProviders/list_service_providers.vue'),
+    meta: {
+      pageTitle: 'Service Providers',
+      breadcrumb: [{
+        text: 'List',
+      },
+      {
+        text: 'View',
+        active: true,
+      },
+      ],
+    },
+  },
 ]

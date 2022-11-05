@@ -28,6 +28,13 @@ export default [
     resource: 'navbar',
   },
   {
+    title: 'Service Providers',
+    route: 'service_providers',
+    icon: 'ToolIcon',
+    action: 'view',
+    resource: 'navbar',
+  },
+  {
     title: 'Users',
     icon: 'FileTextIcon',
     action: 'view',

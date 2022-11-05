@@ -96,14 +96,14 @@
       </template>
       <template #cell(image)="data">
         <enlargeable-image
-          :src="'http://localhost:4000' + data.value"
-          :src_large="'http://localhost:4000' + data.value"
+          :src="'http://34.203.72.68:4000' + data.value"
+          :src_large="'http://34.203.72.68:4000' + data.value"
           animation_duration="600"
         >
           <b-img
             thumbnail
             style="max-height: 80px"
-            :src="'http://localhost:4000' + data.value"
+            :src="'http://34.203.72.68:4000' + data.value"
           />
         </enlargeable-image>
       </template>
