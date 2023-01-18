@@ -96,6 +96,16 @@
                     <feather-icon icon="Trash2Icon" />
                   </b-button>
                 </b-input-group-append>
+                <b-input-group-append>
+                  <b-button
+                    v-ripple.400="'rgba(40, 199, 111, 0.15)'"
+                    size="sm"
+                    :to="{name: 'service_providers_reviews', params: { id: row.item.id } }"
+                    variant="outline-primary text-success"
+                  >
+                    <feather-icon icon="InfoIcon" />
+                  </b-button>
+                </b-input-group-append>
               </b-input-group>
             </div>
           </b-form-group>
@@ -296,60 +306,65 @@
                   </b-card-text>
                 </b-tab>
 
-                <b-tab title="Availbilities">
-                  <template #row-details="row">
-                    <b-card no-body>
-                      <b-row>
-                        <b-col
-                          cols="12"
-                          class="text-center p-0 m-0"
+                <b-tab title="Gallery">
+                  <b-card-text>
+                    <b-row class="border-bottom ">
+                      <b-col cols="12">
+                        <b-table
+                          :items="row.item.service_provider_gallery"
+                          :fields="serviceProviderGalleryFields"
+                          striped
+                          responsive
+                          class="mb-0"
+                          :busy="isBusy"
+                          show-empty
                         >
-                          <label class="h4 p-0 py-1">Payment List</label>
-                        </b-col>
-                        <b-col cols="12">
-                          <b-tabs
-                            pills
-                            card
-                            horizontal
-                          />
-                        </b-col>
-                      </b-row>
+                          <template #cell(Options)="row">
 
-                    </b-card>
-                  </template>
+                            <div>
+                              <!-- As `row.showDetails` is one-way, we call the toggleDetails function on @change -->
+                              <b-form-group>
+                                <div class="d-flex align-items-center w-fit-content">
+                                  <b-input-group>
+                                    <b-input-group-append>
+                                      <b-button
+                                        v-ripple.400="'rgba(40, 199, 111, 0.15)'"
+                                        size="sm"
+                                        variant="outline-primary text-danger"
+                                        @click="deleteGalleryPhoto(row.item.id)"
+                                      >
+                                        <feather-icon icon="Trash2Icon" />
+                                      </b-button>
+                                    </b-input-group-append>
+                                  </b-input-group>
+                                </div>
+                              </b-form-group>
+                            </div>
+                          </template>
+                          <template #empty="scope">
+                            <h4>{{ scope.emptyText }}</h4>
+                          </template>
+                          <template #cell(image)="data">
+                            <enlargeable-image
+                              :src="'http://localhost:4000' + data.value"
+                              :src_large="'http://localhost:4000' + data.value"
+                              animation_duration="600"
+                            >
+                              <b-img
+                                thumbnail
+                                style="max-height: 80px"
+                                :src="'http://localhost:4000' + data.value"
+                              />
+                            </enlargeable-image>
+                          </template>
+                        </b-table>
+                      </b-col>
+                    </b-row>
+                  </b-card-text>
                 </b-tab>
               </b-tabs>
             </b-col>
           </b-row>
-          <b-row class="border-bottom ">
-            <b-col
-              cols="12"
-              class="text-right"
-            >
-              <strong>Created By : </strong>
-              {{ row.item.created_by }}
-            </b-col>
-          </b-row>
-          <b-row
-            v-if="row.item.updated_by"
-            class="border-bottom "
-          >
-            <b-col
-              cols="12"
-              class="text-right"
-            >
-              <strong>Updated By : </strong>
-              {{ row.item.updated_by }}
-            </b-col>
-          </b-row>
-
-          <!-- <b-button
-              size="sm"
-              variant="outline-secondary"
-              @click="row.toggleDetails"
-            >
-              Hide Details
-            </b-button> -->
         </b-card>
       </template>
       <template #cell(profile_photo)="data">
@@ -574,6 +589,24 @@ export default {
           thClass: 'customHead',
         },
       ],
+      serviceProviderGalleryFields: [
+        {
+          key: 'Options',
+          thClass: 'customHead',
+        },
+        {
+          key: 'id',
+          label: 'ID',
+          sortable: true,
+          thClass: 'customHead',
+        },
+        {
+          key: 'Image',
+          label: 'image',
+          sortable: true,
+          thClass: 'customHead',
+        },
+      ],
       serviceProviderAvailability: [
         {
           key: 'Options',
@@ -627,6 +660,68 @@ export default {
         if (result.value) {
           axios
             .get(`users/delete_residential_user/${id}`)
+            .then(response => {
+              if (response.data.hasOwnProperty('success')) {
+                if (response.data.success === true) {
+                  this.getDocuments()
+                  this.$toast({
+                    component: ToastificationContent,
+                    position: 'top-right',
+                    props: {
+                      title: 'Transaction Deleted Successfully',
+                      icon: 'EditIcon',
+                      variant: 'success',
+                    },
+                  })
+                  console.log('Transaction Deleted Successfully')
+                } else {
+                  this.$toast({
+                    component: ToastificationContent,
+                    position: 'top-right',
+                    props: {
+                      title: 'Error',
+                      icon: 'AlertCircleIcon',
+                      variant: 'danger',
+                      text: 'Something went wrong, try again later',
+                    },
+                  })
+                }
+              } else {
+                this.$toast({
+                  component: ToastificationContent,
+                  position: 'top-right',
+                  props: {
+                    title: 'Error',
+                    icon: 'AlertCircleIcon',
+                    variant: 'danger',
+                    text: 'Something went wrong, try again later',
+                  },
+                })
+              }
+            })
+            .catch(error => {
+              console.error(error)
+            })
+        }
+      })
+    },
+    deleteGalleryPhoto(id) {
+      console.log(id)
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        customClass: {
+          confirmButton: 'btn btn-danger',
+          cancelButton: 'btn btn-outline-danger ml-1',
+        },
+        buttonsStyling: false,
+      }).then(result => {
+        if (result.value) {
+          axios
+            .get(`serviceProvider/admin_remove_gallery_photo/${id}`)
             .then(response => {
               if (response.data.hasOwnProperty('success')) {
                 if (response.data.success === true) {

@@ -47,8 +47,8 @@
       :fields="fields"
       responsive
       class="mb-0 bg-white"
-      :busy="isBusy"
-    >
+      :busy="isBusy" 
+      >
       <template #cell(Options)="row">
 
         <div>
@@ -80,7 +80,7 @@
                   <b-button
                     v-ripple.400="'rgba(40, 199, 111, 0.15)'"
                     size="sm"
-                    :to="{name: 'updateuser', params: { id: row.item.id } }"
+                    :to="{name: 'update_residendialUser', params: { id: row.item.id } }"
                     variant="outline-primary text-success"
                   >
                     <feather-icon icon="EditIcon" />
@@ -101,7 +101,6 @@
           </b-form-group>
         </div>
       </template>
- \\
       <template #cell(image)="data">
         <enlargeable-image
           :src="'http://localhost:4000' + data.value"
@@ -275,13 +274,13 @@ export default {
           thClass: 'customHead',
         },
         {
-          key: 'firstName',
+          key: 'first_name',
           label: 'First Name',
           sortable: true,
           thClass: 'customHead',
         },
         {
-          key: 'lastName',
+          key: 'last_name',
           label: 'Last Name',
           sortable: true,
           thClass: 'customHead',
@@ -293,7 +292,7 @@ export default {
           thClass: 'customHead',
         },
         {
-          key: 'phoneNumber',
+          key: 'phone_number',
           label: 'Phone Number',
           sortable: true,
           thClass: 'customHead',
@@ -339,7 +338,7 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .get(`users/delete_residential_user/${id}`)
+            .get(`users/deleteUser/${id}`)
             .then(response => {
               if (response.data.hasOwnProperty('success')) {
                 if (response.data.success === true) {

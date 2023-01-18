@@ -4,93 +4,15 @@
 
       <b-col md="6">
         <b-form-group
-          label="Commission Percentage"
-          label-for="v-commission_percentage"
+          label="Service Fee"
+          label-for="v-service_fee"
         >
           <b-form-input
-            id="v-commission_percentage'"
-            v-model="formValues.commission_percentage"
+            id="v-service_fee'"
+            v-model="formValues.service_fee"
           />
         </b-form-group>
       </b-col>
-      <b-col md="6">
-        <b-form-group
-          label="Payment Gateway Fees"
-          label-for="v-payment_fee"
-        >
-          <b-form-input
-            id="v-payment_fee'"
-            v-model="formValues.payment_fee"
-          />
-        </b-form-group>
-      </b-col>
-      <b-col md="6">
-        <b-form-group
-          label="Privay URL"
-          label-for="v-privay_url"
-        >
-          <b-form-input
-            id="v-privay_url'"
-            v-model="formValues.privay_url"
-          />
-        </b-form-group>
-      </b-col>
-      <b-col md="6">
-        <b-form-group
-          label="Terms & Conditions URL"
-          label-for="v-terms_and_conditions_url"
-        >
-          <b-form-input
-            id="v-terms_and_conditions_url'"
-            v-model="formValues.terms_and_conditions_url"
-          />
-        </b-form-group>
-      </b-col>
-      <b-col md="6">
-        <b-form-group
-          label="Base URL"
-          label-for="v-base_url"
-        >
-          <b-form-input
-            id="v-title'"
-            v-model="formValues.base_url"
-          />
-        </b-form-group>
-      </b-col>
-      <b-col md="6">
-        <b-form-group
-          label="Chatwoot Account Id"
-          label-for="v-chat_woot_account_id"
-        >
-          <b-form-input
-            id="v-chat_woot_account_id'"
-            v-model="formValues.chat_woot_account_id"
-          />
-        </b-form-group>
-      </b-col>
-      <b-col md="6">
-        <b-form-group
-          label="Chatwoot Inbox Id"
-          label-for="v-inbox_id"
-        >
-          <b-form-input
-            id="v-inbox_id'"
-            v-model="formValues.inbox_id"
-          />
-        </b-form-group>
-      </b-col>
-      <b-col md="6">
-        <b-form-group
-          label="Chatwoot Api key"
-          label-for="v-chat_api_key"
-        >
-          <b-form-input
-            id="v-chat_api_key'"
-            v-model="formValues.chat_api_key"
-          />
-        </b-form-group>
-      </b-col>
-
       <!-- submit and reset -->
       <b-col md="12">
         <b-button
@@ -182,21 +104,14 @@ export default {
       isSubmitting: false,
 
       formValues: {
-        id: null,
-        commission_percentage: '',
-        privay_url: '',
-        terms_and_conditions_url: '',
-        base_url: '',
-        chat_woot_account_id: '',
-        inbox_id: '',
-        chat_api_key: '',
-        payment_fee: '',
+        id: '',
+        service_fee: '',
       },
     }
   },
   mounted() {
     this.initTrHeight()
-    this.getCategory()
+    this.getSettings()
   },
   created() {
     window.addEventListener('resize', this.initTrHeight)
@@ -210,7 +125,7 @@ export default {
       console.log('submit', this.formValues)
 
       axios
-        .post('groups/update_urls', this.formValues)
+        .post(`globalSettings/update_payment_gateways/${this.formValues.id}`, this.formValues)
         .then(response => {
           if (response.data.hasOwnProperty('success')) {
             if (response.data.success === true) {
@@ -259,9 +174,8 @@ export default {
           console.error(error)
         })
     },
-    getCategory() {
-      console.log(this.$route.params.id)
-      axios.get('groups/get_urls/').then(response => {
+    getSettings() {
+      axios.get('globalSettings/get_global_seeting/').then(response => {
         console.log(response.data)
         this.formValues = response.data.data
         this.initTrHeight()
