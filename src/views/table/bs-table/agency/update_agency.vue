@@ -200,7 +200,7 @@
           </b-col>
           <b-col md="6">
             <b-form-group
-              label="Expense Type"
+              label="Agency Status"
               label-for="v-purchaseType"
             >
               <v-select
