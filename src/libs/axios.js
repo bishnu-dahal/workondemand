@@ -4,9 +4,13 @@ import Vue from 'vue'
 import axios from 'axios'
 
 const axiosIns = axios.create({
-  //     baseURL: 'http://192.168.100.6:4000',
-  baseURL: 'http://www.rizorsiumani.com.mt:4000',
-  headers: { 'Access-Control-Allow-Origin': 'http://www.rizorsiumani.com.mt:4000' },
+  baseURL: 'http://rizorsiumani.com.mt:4000',
+  withCredentials: false,
+  headers: {
+    'Access-Control-Allow-Origin' : '*',
+    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    }
+  
 })
 
 Vue.prototype.$http = axiosIns

@@ -12,6 +12,59 @@
             v-model="formValues.service_fee"
           />
         </b-form-group>
+        
+      </b-col>
+
+      <b-col md="6">
+        <b-form-group
+          label="Chatwoot Account Id"
+          label-for="v-chatwoot_account_id"
+        >
+          <b-form-input
+            id="v-chatwoot_account_id'"
+            v-model="formValues.chatwoot_account_id"
+          />
+        </b-form-group>
+        
+      </b-col>
+
+      <b-col md="6">
+        <b-form-group
+          label="Chatwoot Inbox Id"
+          label-for="v-chatwoot_inbox_id"
+        >
+          <b-form-input
+            id="v-chatwoot_inbox_id'"
+            v-model="formValues.chatwoot_inbox_id"
+          />
+        </b-form-group>
+        
+      </b-col>
+
+      <b-col md="6">
+        <b-form-group
+          label="Stripe Public Key"
+          label-for="v-stripe_publish_key"
+        >
+          <b-form-input
+            id="v-service_fee'"
+            v-model="formValues.stripe_publish_key"
+          />
+        </b-form-group>
+        
+      </b-col>
+
+      <b-col md="6">
+        <b-form-group
+          label="Stripe Secret Key"
+          label-for="v-stripe_secret_key"
+        >
+          <b-form-input
+            id="v-service_fee'"
+            v-model="formValues.stripe_secret_key"
+          />
+        </b-form-group>
+        
       </b-col>
       <!-- submit and reset -->
       <b-col md="12">
@@ -106,6 +159,10 @@ export default {
       formValues: {
         id: '',
         service_fee: '',
+        chatwoot_account_id: '',
+        chatwoot_inbox_id: '',
+        stripe_publish_key: '',
+        stripe_secret_key: '',
       },
     }
   },

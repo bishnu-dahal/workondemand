@@ -57,10 +57,22 @@ export default [
   },
   {
     title: 'Service Providers',
-    route: 'service_providers',
-    icon: 'ToolIcon',
+    icon: 'FileTextIcon',
     action: 'view',
     resource: 'navbar',
+    children: [{
+      title: 'Indvidual',
+      route: 'service_providers',
+      action: 'view',
+      resource: 'navbar',
+    },
+    {
+      title: 'In House',
+      route: 'listInHouseStaff',
+      action: 'view',
+      resource: 'user',
+    },
+    ],
   },
   {
     title: 'Users',
@@ -76,12 +88,6 @@ export default [
     {
       title: 'Commercial',
       route: 'commercialUsers',
-      action: 'view',
-      resource: 'user',
-    },
-    {
-      title: 'In House',
-      route: 'listInHouseStaff',
       action: 'view',
       resource: 'user',
     },
