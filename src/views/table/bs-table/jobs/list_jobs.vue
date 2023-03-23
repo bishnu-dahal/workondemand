@@ -197,14 +197,14 @@
       </template>
       <template #cell(attachment)="data">
         <enlargeable-image
-          :src="'http://localhost:4000' + data.value"
-          :src_large="'http://localhost:4000' + data.value"
+          :src="'https://apiserver.rizorsiumani.com.mt' + data.value"
+          :src_large="'https://apiserver.rizorsiumani.com.mt' + data.value"
           animation_duration="600"
         >
           <b-img
             thumbnail
             style="max-height: 80px"
-            :src="'http://localhost:4000' + data.value"
+            :src="'https://apiserver.rizorsiumani.com.mt' + data.value"
           />
         </enlargeable-image>
       </template>
