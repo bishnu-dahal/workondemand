@@ -174,38 +174,15 @@
         serviceProviderfilteredOptions: [],
         usersfilteredOptions: [],
         formValues: {
-          description: '',
-          address: '',
-          latitude: '',
-          longitude: '',
-          subTotal: '',
-          total: '',
-          discount: '',
-          status: '',
-          start_date: '',
-          user:{
-            first_name: '',
-            last_name: '',
-            email: '',
-            phone_number: '',
-            image: ''
-          },
-          service_provider: {
-            id: '',
-            first_name: '',
-            last_name: '',
-            profile_photo: '',
-            email: '',
-            phone_number: '',
-            active: ''
-        },
+          title: '',
+          image: '',
+          color: '',
         },
   
       }
     },
     mounted() {
       this.initTrHeight()
-      this.getBookingDetail()
     },
     created() {
       window.addEventListener('resize', this.initTrHeight)
@@ -268,19 +245,62 @@
             console.error(error)
           })
       },
-      getBookingDetail() {
-      console.log(this.$route.params.id)
-      const appendWithurl = `booking/admin_service_provider_booking_detail/${this.$route.params.id}`
-
-      axios.get(appendWithurl).then(response => {
-        console.log(response.data)
-        this.formValues = response.data.data
-        this.initTrHeight()
-        console.log('Category Fetched')
-      }).catch(error => {
-        console.error(error)
-      })
-    },
+      imageChange(e) {
+        this.file = e.target.files[0]
+      },
+      imageUpload() {
+        const formData = new FormData()
+        formData.append('image', this.file)
+        console.log(formData)
+        axios
+          .post('/categories/uploadFile', formData)
+          .then(response => {
+            if (response.data.hasOwnProperty('success')) {
+              if (response.data.success === true) {
+                this.formValues.image = response.data.filePATH
+                this.Submit()
+                console.log('image Url', this.formValues.image)
+                this.$toast({
+                  component: ToastificationContent,
+                  position: 'top-right',
+                  props: {
+                    title: response.data.message,
+                    icon: 'EditIcon',
+                    variant: 'success',
+                  },
+                })
+              } else {
+                this.isSubmitting = false
+  
+                this.$toast({
+                  component: ToastificationContent,
+                  position: 'top-right',
+                  props: {
+                    title: response.data.message,
+                    icon: 'AlertCircleIcon',
+                    variant: 'danger',
+                  },
+                })
+              }
+            } else {
+              this.isSubmitting = false
+  
+              this.$toast({
+                component: ToastificationContent,
+                position: 'top-right',
+                props: {
+                  title: 'Error',
+                  icon: 'AlertCircleIcon',
+                  variant: 'danger',
+                  text: 'Something went wrong, try again later',
+                },
+              })
+            }
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      },
       onInputChange(item) {
       const text = item.serviceProviderSearch
       if (text === '' || text === undefined) {
