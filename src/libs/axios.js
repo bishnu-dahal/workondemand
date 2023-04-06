@@ -4,7 +4,7 @@ import Vue from 'vue'
 import axios from 'axios'
 
 const axiosIns = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: 'http://apiserver.rizorsiumani.com.mt',
   withCredentials: false,
   headers: {
     "Access-Control-Allow-Origin":"*",
