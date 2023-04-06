@@ -353,6 +353,26 @@ export default [
       ],
     },
   },
+
+  {
+    path: '/update_booking/:id',
+    name: 'update-bookings',
+    component: () => import('@/views/table/bs-table/bookings/update_booking.vue'),
+    meta: {
+      pageTitle: 'Booking',
+      breadcrumb: [{
+        text: 'Update',
+      },
+      {
+        text: 'Booking',
+        active: true,
+      },
+      ],
+    },
+  },
+
+
+
   {
     path: '/bookingDetail/:id',
     name: 'bookingDetail',

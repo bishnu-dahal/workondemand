@@ -9,7 +9,7 @@
       finish-button-text="Submit"
       back-button-text="Previous"
       class="wizard-vertical mb-2"
-      @on-complete="formSubmitted"
+      @on-complete="imageUpload"
     >
       <tab-content title="Account Details">
         <b-row>
@@ -90,39 +90,21 @@
             </b-form-group>
           </b-col>
 
-          <b-col md="12">
-            <b-row>
-              <b-col md="6">
-                <b-form-group
-                  label="Profile Photo"
-                  label-for="v-emp_photo"
-                >
-
-                  <b-form-file
-                    id="v-emp_photo"
-                    v-model="formValues.profile_photo"
-                    accept="image/* , .pdf"
-                    placeholder="Choose a file or drop it here..."
-                    drop-placeholder="Drop file here..."
-                  />
-                </b-form-group>
-              </b-col>
-              <b-col md="6">
-                <enlargeable-image
-                  v-if="formValues.ui_emp_photo"
-                  :src="formValues.ui_emp_photo"
-                  :src_large="formValues.ui_emp_photo"
-                  animation_duration="600"
-                >
-                  <b-img
-                    style="max-height: 80px;"
-                    thumbnail
-                    :src="formValues.ui_emp_photo"
-                  />
-                </enlargeable-image>
-              </b-col>
-            </b-row>
-          </b-col>
+          <b-col md="6">
+        <b-form-group
+          label="Attachment (*)."
+          label-for="attachment"
+        >
+          <b-form-file
+            id="attachment"
+            v-model="formValues.image"
+            accept="image/* , .pdf"
+            placeholder="Upload attachment..."
+            drop-placeholder="Drop file here..."
+            @change="imageChange($event)"
+          />
+        </b-form-group>
+      </b-col>
         </b-row>
       </tab-content>
 
@@ -460,6 +442,62 @@ export default {
         console.error(error)
       })
     },
+    imageChange(e) {
+      this.file = e.target.files[0]
+    },
+    imageUpload() {
+      const formData = new FormData()
+      formData.append('image', this.file)
+      axios
+        .post('/onboarding/uploadFile',
+          formData)
+        .then(response => {
+          if (response.data.hasOwnProperty('success')) {
+            if (response.data.success === true) {
+              this.formValues.profile_photo = response.data.filePATH
+              this.formSubmitted()
+              console.log('image Url', this.formValues.profile_photo)
+              this.$toast({
+                component: ToastificationContent,
+                position: 'top-right',
+                props: {
+                  title: response.data.message,
+                  icon: 'EditIcon',
+                  variant: 'success',
+                },
+              })
+            } else {
+              this.isSubmitting = false
+
+              this.$toast({
+                component: ToastificationContent,
+                position: 'top-right',
+                props: {
+                  title: response.data.message,
+                  icon: 'AlertCircleIcon',
+                  variant: 'danger',
+                },
+              })
+            }
+          } else {
+            this.isSubmitting = false
+
+            this.$toast({
+              component: ToastificationContent,
+              position: 'top-right',
+              props: {
+                title: 'Error',
+                icon: 'AlertCircleIcon',
+                variant: 'danger',
+                text: 'Something went wrong, try again later',
+              },
+            })
+          }
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
   },
 }
 </script>
@@ -474,17 +512,17 @@ export default {
 
 .wizard-icon-container{
 
-  background-color: #004aad !important;
+  background-color: #00A688 !important;
 }
 
 .stepTitle.active{
 
-  color: #004aad !important;
+  color: #00A688 !important;
 }
 
 .wizard-btn{
 
-  background-color: #004aad !important;
+  background-color: #00A688 !important;
 }
 
 </style>

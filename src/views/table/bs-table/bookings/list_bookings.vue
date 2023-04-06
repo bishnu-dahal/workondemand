@@ -35,14 +35,14 @@
 
         </div>
       </b-form-group>
-      <b-form-group>
+      <!-- <b-form-group>
         <div class="d-flex align-items-center">
           <b-input-group>
             <b-input-group-prepend>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="primary"
-                :to="{ name: 'add_category' }"
+                :to="{ name: 'create-bookings' }"
                 title="Create Category"
               >
                 ADD+
@@ -50,7 +50,7 @@
             </b-input-group-prepend>
           </b-input-group>
         </div>
-      </b-form-group>
+      </b-form-group> -->
     </div>
     <b-modal
       id="modal-advancesearch"
@@ -208,8 +208,8 @@
                   v-ripple.400="'rgba(40, 199, 111, 0.15)'"
                   size="sm"
                   :to="{
-                    name: 'Employee-edit',
-                    params: { empId: row.item.emp_id },
+                    name: 'update-bookings',
+                    params: { id: row.item.id },
                   }"
                   variant="outline-primary text-success"
                 >
