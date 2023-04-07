@@ -7,7 +7,7 @@ const axiosIns = axios.create({
   baseURL: 'https://apiserver.rizorsiumani.com.mt',
   withCredentials: false,
   headers: {
-    "Access-Control-Allow-Origin":"*",
+    "Access-Control-Allow-Origin":"",
     "Access-Control-Allow-Methods": "*",
     'Access-Control-Allow-Headers': "*",
       "user-agent":

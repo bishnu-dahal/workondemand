@@ -209,7 +209,7 @@ export default {
         formData.append('image', this.file)
         console.log(formData)
         axios
-          .post('/admin/uploadFile', formData)
+          .post('/categories/uploadFile', formData)
           .then(response => {
             if (response.data.hasOwnProperty('success')) {
               if (response.data.success === true) {
