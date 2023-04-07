@@ -5,12 +5,13 @@
       <b-col xl="4" md="6">
         <ecommerce-statistics :data="data.statisticsItems" />
       </b-col>
+     
       <b-col v-if="$ability.can('Master', 'dashboard')" xl="8" md="6">
         <chartjs-bar-chart />
       </b-col>
-      <!-- <b-col v-if="$ability.can('Master', 'dashboard')" lg="12">
+      <b-col v-if="$ability.can('Master', 'dashboard')" lg="12">
         <ecommerce-company-table />
-      </b-col> -->
+      </b-col>
     </b-row>
 
   </section>

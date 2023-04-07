@@ -32,8 +32,8 @@
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="primary"
-                :to="{ name: 'add_category' }"
-                title="Create Category"
+                :to="{ name: 'create-service-providers' }"
+                title="Create Servicfe Providers"
               >
                 ADD+
               </b-button>
@@ -80,7 +80,7 @@
                   <b-button
                     v-ripple.400="'rgba(40, 199, 111, 0.15)'"
                     size="sm"
-                    :to="{name: 'updateuser', params: { id: row.item.id } }"
+                    :to="{name: 'update-service-providers', params: { id: row.item.id } }"
                     variant="outline-primary text-success"
                   >
                     <feather-icon icon="EditIcon" />
@@ -659,7 +659,7 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .get(`users/delete_residential_user/${id}`)
+            .get(`serviceProvider/deleteServiceProvider/${id}`)
             .then(response => {
               if (response.data.hasOwnProperty('success')) {
                 if (response.data.success === true) {

@@ -202,20 +202,6 @@
                   />
                 </b-button>
               </b-input-group-prepend>
-
-              <b-input-group-append v-if="$ability.can('edit', 'employees')">
-                <b-button
-                  v-ripple.400="'rgba(40, 199, 111, 0.15)'"
-                  size="sm"
-                  :to="{
-                    name: 'update-bookings',
-                    params: { id: row.item.id },
-                  }"
-                  variant="outline-primary text-success"
-                >
-                  <feather-icon icon="EditIcon" />
-                </b-button>
-              </b-input-group-append>
             </b-input-group>
           </div>
         </b-form-group>

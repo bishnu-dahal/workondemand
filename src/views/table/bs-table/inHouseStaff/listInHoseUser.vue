@@ -338,7 +338,7 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .get(`users/deleteUser/${id}`)
+            .get(`serviceProvider/deleteServiceProvider/${id}`)
             .then(response => {
               if (response.data.hasOwnProperty('success')) {
                 if (response.data.success === true) {
@@ -389,7 +389,7 @@ export default {
       this.isBusy = true
 
       axios
-        .get(`/users/get_all_in_house_users/${this.page}/${this.searchTerm}`)
+        .get(`/serviceProvider/get_all_in_house_users/${this.page}/${this.searchTerm}`)
 
         .then(response => {
           this.items = response.data.data

@@ -5,7 +5,7 @@
     class="card-statistics"
   >
     <b-card-header>
-      <b-card-title>Statistics</b-card-title>
+      <b-card-title>Bookings Statistics</b-card-title>
     </b-card-header>
     <b-card-body class="statistics-body">
       <b-row>
@@ -85,11 +85,16 @@ export default {
   methods: {
 
     getstats() {
-      axios.get('/dashboardStats')
+      axios.get('booking/bookingsChart')
 
         .then(response => {
           console.log('response', response.data.data)
-          this.data = response.data.data
+          var dict = []
+          dict.push(
+     { "subtitle": "Cancelled Bookings",  "title" : response.data.cancelledBookings ,   "icon": "PackageIcon" , "color" : "light-info" , "class" : "mb-1" },
+     { "subtitle": "Pending Bookings",  "title" : response.data.pendingBookings , "icon": "PackageIcon" , "color" : "light-info", "class" : "mb-1"},
+     { "subtitle": "Completed Bookings",  "title" : response.data.inProgressBookings ,"icon": "PackageIcon" , "color" : "light-danger" , "class" : "mb-1"});
+          this.data = dict
 
           // TODO
         }).catch(error => {

@@ -37,6 +37,11 @@
             drop-placeholder="Drop file here..."
             @change="imageChange($event)"
           />
+          <b-form-group
+          label="Note: Max 5 Mb file"
+          label-for="attachment"
+        >
+          </b-form-group>
         </b-form-group>
       </b-col>
 

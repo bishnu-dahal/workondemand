@@ -35,7 +35,7 @@
 
         </div>
       </b-form-group>
-      <b-form-group>
+      <!-- <b-form-group>
         <div class="d-flex align-items-center">
           <b-input-group>
             <b-input-group-prepend>
@@ -50,7 +50,7 @@
             </b-input-group-prepend>
           </b-input-group>
         </div>
-      </b-form-group>
+      </b-form-group> -->
     </div>
     <b-modal
       id="modal-advancesearch"

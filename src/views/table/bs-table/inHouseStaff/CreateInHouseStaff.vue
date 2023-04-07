@@ -173,7 +173,7 @@ export default {
       console.log('submit', this.formValues)
 
       axios
-        .post('users/create_in_house_staff', this.formValues)
+        .post('serviceProvider/create_in_house_staff', this.formValues)
         .then(response => {
           if (response.data.hasOwnProperty('success')) {
             if (response.data.success === true) {

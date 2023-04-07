@@ -27,7 +27,7 @@
       </b-form-group>
       <b-form-group>
         <div class="d-flex align-items-center">
-          <b-input-group>
+          <!-- <b-input-group>
             <b-input-group-prepend>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
@@ -38,7 +38,7 @@
                 ADD+
               </b-button>
             </b-input-group-prepend>
-          </b-input-group>
+          </b-input-group> -->
         </div>
       </b-form-group>
     </div>

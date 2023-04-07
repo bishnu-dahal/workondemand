@@ -321,6 +321,41 @@ export default [
       ],
     },
   },
+
+  {
+    path: '/create_service_providers',
+    name: 'create-service-providers',
+    component: () => import('@/views/table/bs-table/serviceProviders/addServiceProvider.vue'),
+    meta: {
+      pageTitle: 'Service Providers',
+      breadcrumb: [{
+        text: 'List',
+      },
+      {
+        text: 'View',
+        active: true,
+      },
+      ],
+    },
+  },
+
+  {
+    path: '/update_service_provider',
+    name: 'update-service-providers',
+    component: () => import('@/views/table/bs-table/serviceProviders/updateServiceProvider.vue'),
+    meta: {
+      pageTitle: 'Service Providers',
+      breadcrumb: [{
+        text: 'List',
+      },
+      {
+        text: 'View',
+        active: true,
+      },
+      ],
+    },
+  },
+
   {
     path: '/service_providers_reviews/:id',
     name: 'service_providers_reviews',

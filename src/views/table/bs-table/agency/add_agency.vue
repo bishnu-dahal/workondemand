@@ -103,6 +103,7 @@
             drop-placeholder="Drop file here..."
             @change="imageChange($event)"
           />
+          
         </b-form-group>
       </b-col>
         </b-row>

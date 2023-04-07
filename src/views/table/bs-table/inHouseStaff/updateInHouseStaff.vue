@@ -185,13 +185,13 @@ export default {
       console.log('submit', this.formValues)
 
       axios
-        .post(`users/admin_update_user/${this.$route.params.id}`, this.formValues)
+        .post(`serviceProvider/admin_update_service_provider/${this.$route.params.id}`, this.formValues)
         .then(response => {
           if (response.data.hasOwnProperty('success')) {
             if (response.data.success === true) {
               console.log(response.data.data)
 
-              this.$router.replace('/residentialUsers').then(() => {
+              this.$router.replace('/listInHouseStaff').then(() => {
                 this.$toast({
                   component: ToastificationContent,
                   position: 'top-right',
@@ -236,7 +236,7 @@ export default {
     },
     getUserDetail() {
       console.log(this.$route.params.id)
-      axios.get(`users/userDetail/${this.$route.params.id}`).then(response => {
+      axios.get(`serviceProvider/serviceProviderDetail/${this.$route.params.id}`).then(response => {
         console.log(response.data)
         this.formValues = response.data.data
         this.initTrHeight()

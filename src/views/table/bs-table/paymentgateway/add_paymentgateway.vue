@@ -49,6 +49,7 @@
             @change="imageChange($event)"
           />
         </b-form-group>
+        
       </b-col>
 
       <!-- submit and reset -->
